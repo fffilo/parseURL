@@ -9,7 +9,7 @@ window.parseURL = function(url) {
     el.href = url || document.location.href;
 
     var result = {
-        href     : url,                // "http://domain.com:8080/path/to/somewhere/?foo=bar#hash"
+        href     : el.href,            // "http://domain.com:8080/path/to/somewhere/?foo=bar#hash"
         protocol : el.protocol,        // "http:"
         hostname : el.hostname,        // "domain.com"
         port     : el.port || "80",    // "8080"
@@ -21,7 +21,9 @@ window.parseURL = function(url) {
     }
 
     var arr = el.search.substring(1).split("&");
-    for(var i = 0; i < arr.length; i++) {
+    for (var i = 0; i < arr.length; i++) {
+        if (!arr[i]) continue;
+
         var kvl = arr[i].split("=");
         var key = decodeURIComponent(kvl[0]);
         var val = decodeURIComponent(kvl.slice(1).join("="));
