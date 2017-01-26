@@ -27,6 +27,7 @@ window.parseURL = function(url) {
         var kvl = arr[i].split("=");
         var key = decodeURIComponent(kvl[0]);
         var val = decodeURIComponent(kvl.slice(1).join("="));
+        if (!key) continue;
 
         result.data[key] = val;
     }
